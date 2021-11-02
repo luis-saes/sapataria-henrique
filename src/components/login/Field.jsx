@@ -2,7 +2,6 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 
 const Field = (props) => {
-  console.log(props);
   return (
     <div>
       <Form.Group controlId="formBasicEmail">

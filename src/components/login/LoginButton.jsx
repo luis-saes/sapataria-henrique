@@ -3,10 +3,17 @@ import Button from "react-bootstrap/Button";
 import styles from "./LoginButton.module.css";
 
 const LoginButton = (props) => {
-  console.log(props);
+  const clickHandler = (event) => {
+    props.onClick(event);
+  };
+
   return (
     <div>
-      <Button className={styles.loginButton} type="submit">
+      <Button
+        onClick={clickHandler}
+        className={styles.loginButton}
+        type="submit"
+      >
         {props.message}
       </Button>
     </div>

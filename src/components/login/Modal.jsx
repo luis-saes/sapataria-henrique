@@ -5,6 +5,10 @@ import LoginButton from "./LoginButton";
 import styles from "./Modal.module.css";
 
 const Modal = () => {
+  const logarClickHandler = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className={styles.modal}>
       <Form>
@@ -16,7 +20,11 @@ const Modal = () => {
         />
         <Field name="Senha" type="password" placeholder="Digite sua senha" />
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <LoginButton message="Logar" />
+          <LoginButton
+            onChange="logarClickHandler"
+            message="Logar"
+            onClick={logarClickHandler}
+          />
         </div>
       </Form>
     </div>
