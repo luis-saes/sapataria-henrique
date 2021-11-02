@@ -1,0 +1,10 @@
+.modal {
+  background-color: #fff;
+  width: 400px;
+  height: 300px;
+  color: black;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+}
