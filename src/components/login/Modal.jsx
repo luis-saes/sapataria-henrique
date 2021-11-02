@@ -2,6 +2,7 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Field from "./Field";
 import LoginButton from "./LoginButton";
+import Logo from "./Logo";
 import styles from "./Modal.module.css";
 
 const Modal = () => {
@@ -11,6 +12,7 @@ const Modal = () => {
 
   return (
     <div className={styles.modal}>
+      <Logo />
       <Form>
         <Field
           name="Email"
