@@ -4,12 +4,9 @@ import Field from "./Field";
 import LoginButton from "./LoginButton";
 import Logo from "./Logo";
 import styles from "./Modal.module.css";
+import { Link } from "react-router-dom";
 
-const Modal = () => {
-  const logarClickHandler = (event) => {
-    event.preventDefault();
-  };
-
+const Modal = ({ setToken }) => {
   return (
     <div className={styles.modal}>
       <Logo />
@@ -21,13 +18,11 @@ const Modal = () => {
           muted="Seu e-mail jamais será compartilhado com terceiros."
         />
         <Field name="Senha" type="password" placeholder="Digite sua senha" />
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <LoginButton
-            onChange="logarClickHandler"
-            message="Logar"
-            onClick={logarClickHandler}
-          />
-        </div>
+        <Link to="/dashboard">
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <LoginButton message="Logar" />
+          </div>
+        </Link>
       </Form>
     </div>
   );
