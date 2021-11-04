@@ -33,13 +33,17 @@ Requisitos não funcionais:
 
 ## Regras de uso do Git
 
+- Para mudanças de código, utilize a branch dev e quando for atualizar a main, criar um pull request.
+- Utilize o .gitignore para excluir arquivos muito pesados desnecessários para a atualização do projeto no git.
+- Dê preferência a imagens vetorizadas ao tratar-se da utilização de ícones.
 - Mantenha o padrão da estrutura de pastas.
 - Para o front-end, mantenha os arquivos de mídia dentro de src/assets, criando uma nova pasta dentro desta, se julgar necessário.
-- Para mudanças de código, utilize a branch dev e quando for atualizar a main, criar um pull request.
+
+## Boas práticas de codificação
+
 - Utilize a extensão prettier do VSCode para formatar o código, mantendo as configurações padrão.
 - Evite componentes com códigos muito extensos, tente manter cada arquivo com uma única função primordial.
 - O CSS deve ficar em um arquivo separado, nomeado como <Nome_do_arquivo>.module.css e importado no componente.
 - Os arquivos, com exceção do App.js e index.js devem ser feitos utilizando a extensão '.jsx'.
-- Utilize o .gitignore para excluir arquivos muito pesados desnecessários para a atualização do projeto no git.
-- Dê preferência a imagens vetorizadas ao tratar-se da utilização de ícones.
-- Garanta que todo o commit tenha uma mensagem explicando, de forma sucinta, o que foi feito.
+- Nomeie os arquivos, funções e variáveis de forma significativa, de forma com que faça sentido.
+- Evite comentários extensos, garanta que o código seja legível sem precisar de comentários para explicar cada passo.
