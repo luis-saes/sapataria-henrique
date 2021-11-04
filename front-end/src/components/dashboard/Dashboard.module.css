@@ -1,0 +1,16 @@
+.dashboard {
+  background-color: #f5f7ff;
+  width: 100%;
+}
+
+.sidebar {
+  background-color: #434343;
+  height: 100vh;
+  width: 12vw;
+}
+
+.flexStart {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
