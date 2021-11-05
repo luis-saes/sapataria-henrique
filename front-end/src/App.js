@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "./components/login/Modal";
 import Dashboard from "./components/dashboard/Dashboard";
+import Funcionarios from "./components/dashboard/funcionarios/Funcionarios";
+import Clientes from "./components/dashboard/clientes/Clientes";
+import Sapatos from "./components/dashboard/sapatos/Sapatos";
+import Vendas from "./components/dashboard/vendas/Vendas";
 import styles from "./App.module.css";
 import { Routes, Route } from "react-router-dom";
 
@@ -21,6 +25,10 @@ function App() {
         <Route path="/" element={<Modal />} />
         <Route path="/login" element={<Modal />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/funcionarios" element={<Funcionarios />} />
+        <Route path="/clientes" element={<Clientes />} />
+        <Route path="/sapatos" element={<Sapatos />} />
+        <Route path="/vendas" element={<Vendas />} />
       </Routes>
     </div>
   );
