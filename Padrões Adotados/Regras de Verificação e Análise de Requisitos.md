@@ -1,15 +1,13 @@
-Requisitos funcionais:
+# Regras de Verificação e Análise de Requisitos
 
-- Realizar a autenticação do usuário ao entrar no sistema.
-- Permitir o cadastro de novas informações em cada tabela.
-- Permitir a leitura dos dados de cada tabela.
-- Permitir a atualização dos dados de cada tabela.
-- Permitir a remoção de dados de cada tabela.
+## **Características a serem seguidas ao se especificar requisitos do sistema**
 
-Requisitos não funcionais:
-
-- O sistema deverá realizar a inserção de uma linha nas tabelas em até 500 milissegundos.
-- A interface deve ser intuitiva para navegação.
-- O sistema deverá rodar em qualquer sistema.
-- O sistema deverá ser desenvolvido no framework React e NodeJS com banco de dados Oracle SQL.
-- O sistema deverá ter alta disponibilidade, de no mínimo, 90% do tempo.
+- Os requisitos serão agrupados na forma de Requisitos Funcionais (ou RF, que são as necessidades e problemas que devem ser resolvidos/atendidos pelo software por meio de funções ou serviços) e Requisitos não funcionais (ou RNF, que são aqueles relacionados à forma com que o software tornará real o que fora planejado, descrição de como serão feitos).
+- Os requisitos devem ser devidamente identificados, com qual grupo de requisitos ele faz parte e sua numeração única. Ex: RF001
+- Ao se especificar um requisito deve-se optar por frases curtas e objetivas para melhor compreensão
+- Ao se especificar um requisito deve-se evitar palavras vagas, ou que coloquem uma dificuldade na verificação/medição do requisito, como: Todo, Maioria, Talvez, Preferencialmente, Quase, e variações.
+- O requisito deve conter um campo “Situação”, podendo ser:
+  - **Proposto**: requisito em discussão, ainda não foi aprovado
+  - **Incorporado**: requisito foi incorporado à estrutura do software
+  - **Aprovado**: requisito foi avaliado e aprovado
+  - **Vetado**: requisito foi vetado
