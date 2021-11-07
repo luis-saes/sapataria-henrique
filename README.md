@@ -24,8 +24,8 @@ Requisitos funcionais:
 Requisitos não funcionais:
 
 - O sistema deverá realizar a inserção de uma linha nas tabelas em até 500 milissegundos.
-- Os botões da interface da dashboard devem seguir um padrão.
-- O sistema deverá funcionar em qualquer edição estável do Windows 10 Pro, Home e Education.
+- Os botões da interface da dashboard devem ser padronizados.
+- O sistema deverá funcionar em qualquer edição [suportada](https://docs.microsoft.com/pt-PT/lifecycle/faq/windows) do Windows 10 Pro, Home e Education.
 - O sistema deverá ser desenvolvido no framework React versão 17.0.2 e NodeJS versão 16.13.0 com banco de dados Oracle SQL versão 21c.
 - O sistema deverá ter alta disponibilidade, de no mínimo, 90% do tempo de 24/7.
 
