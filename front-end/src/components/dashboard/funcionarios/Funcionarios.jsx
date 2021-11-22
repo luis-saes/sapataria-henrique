@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Sidebar from "../Sidebar";
+import styles from "../Dashboard.module.css";
+import MUITable from "../generic/MUITable";
+import axios from "axios";
 
-function Funcionarios() {
-  const [funcionarios, setFuncionarios] = useState([]);
-
-  useEffect(() => {
-    fetch("/funcionarios/")
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
-      .then((jsonResponse) => setFuncionarios(jsonResponse.funcionariosList));
+const componentDidMount = () => {
+  axios.get("/funcionarios").then(function (response) {
+    console.log(response.data.temp_c);
   });
+};
+
+const Funcionarios = () => {
+  componentDidMount();
 
   return (
-    <div>
-      {funcionarios.map((funcionario) => (
-        <li>{{ funcionario }}</li>
-      ))}
+    <div className={styles.dashboardOther}>
+      <Sidebar />
+      <MUITable />
     </div>
   );
-}
+};
 
 export default Funcionarios;
