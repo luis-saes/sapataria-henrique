@@ -1,6 +1,8 @@
 .dashboard {
+  display: flex;
+  flex-direction: row;
   background-color: #f5f7ff;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .sidebar {
@@ -13,4 +15,11 @@
   width: 100%;
   display: flex;
   justify-content: flex-start;
+}
+
+.dashboardOther {
+  display: flex;
+  flex-direction: row;
+  background-color: #f5f7ff;
+  width: 100%;
 }

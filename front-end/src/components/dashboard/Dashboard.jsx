@@ -1,15 +1,13 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 import styles from "./Dashboard.module.css";
+import MUITable from "./generic/MUITable";
 
 const Dashboard = () => {
   return (
-    <div className={styles.dashboard}>
-      <div className={styles.flexStart}>
-        <div className={styles.sidebar}>
-          <Sidebar />
-        </div>
-      </div>
+    <div className={styles.dashboardOther}>
+      <Sidebar />
+      <MUITable />
     </div>
   );
 };
