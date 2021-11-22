@@ -6,9 +6,7 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboard}>
       <div className={styles.flexStart}>
-        <div className={styles.sidebar}>
-          <Sidebar />
-        </div>
+        <Sidebar />
       </div>
     </div>
   );

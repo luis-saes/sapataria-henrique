@@ -1,5 +1,6 @@
 import React from "react";
 import SectionButton from "./SectionButton";
+import styles from "./Dashboard.module.css";
 import { Link } from "react-router-dom";
 import { ReactComponent as Home } from "../../assets/icons/home.svg";
 import { ReactComponent as Worker } from "../../assets/icons/worker.svg";
@@ -11,47 +12,49 @@ import { ReactComponent as Logout } from "../../assets/icons/logout.svg";
 const Sidebar = () => {
   const currentPathName = window.location.pathname;
   return (
-    <div>
-      <div style={{ marginTop: "20px" }}>
-        <Link to="/dashboard" style={{ textDecoration: "none" }}>
+    <div className={styles.sidebar}>
+      <div>
+        <div style={{ marginTop: "20px" }}>
+          <Link to="/dashboard" style={{ textDecoration: "none" }}>
+            <SectionButton
+              logo={<Home />}
+              text="Início"
+              active={currentPathName === "/dashboard"}
+            />
+          </Link>
+        </div>
+        <Link to="/funcionarios" style={{ textDecoration: "none" }}>
           <SectionButton
-            logo={<Home />}
-            text="Início"
-            active={currentPathName === "/dashboard"}
+            logo={<Worker />}
+            text="Funcionários"
+            active={currentPathName === "/funcionarios"}
           />
         </Link>
+        <Link to="/clientes" style={{ textDecoration: "none" }}>
+          <SectionButton
+            logo={<Client />}
+            text="Clientes"
+            active={currentPathName === "/clientes"}
+          />
+        </Link>
+        <Link to="/sapatos" style={{ textDecoration: "none" }}>
+          <SectionButton
+            logo={<Shoes />}
+            text="Sapatos"
+            active={currentPathName === "/sapatos"}
+          />
+        </Link>
+        <Link to="/vendas" style={{ textDecoration: "none" }}>
+          <SectionButton
+            logo={<Sales />}
+            text="Vendas"
+            active={currentPathName === "/vendas"}
+          />
+        </Link>
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          <SectionButton logo={<Logout />} text="Sair" />
+        </Link>
       </div>
-      <Link to="/funcionarios" style={{ textDecoration: "none" }}>
-        <SectionButton
-          logo={<Worker />}
-          text="Funcionários"
-          active={currentPathName === "/funcionarios"}
-        />
-      </Link>
-      <Link to="/clientes" style={{ textDecoration: "none" }}>
-        <SectionButton
-          logo={<Client />}
-          text="Clientes"
-          active={currentPathName === "/clientes"}
-        />
-      </Link>
-      <Link to="/sapatos" style={{ textDecoration: "none" }}>
-        <SectionButton
-          logo={<Shoes />}
-          text="Sapatos"
-          active={currentPathName === "/sapatos"}
-        />
-      </Link>
-      <Link to="/vendas" style={{ textDecoration: "none" }}>
-        <SectionButton
-          logo={<Sales />}
-          text="Vendas"
-          active={currentPathName === "/vendas"}
-        />
-      </Link>
-      <Link to="/login" style={{ textDecoration: "none" }}>
-        <SectionButton logo={<Logout />} text="Sair" />
-      </Link>
     </div>
   );
 };
