@@ -24,9 +24,9 @@ Requisitos funcionais:
 Requisitos não funcionais:
 
 - O sistema deverá realizar a inserção de uma linha nas tabelas em até 500 milissegundos.
-- Os botões da interface da dashboard devem ser padronizados.
+- As tabelas da interface da dashboard devem ser padronizados seguindo a biblioteca Material-UI versão 5.2.0.
 - O sistema deverá funcionar em qualquer edição [suportada](https://docs.microsoft.com/pt-PT/lifecycle/faq/windows) do Windows 10 Pro, Home e Education.
-- O sistema deverá ser desenvolvido no framework React versão 17.0.2 e NodeJS versão 16.13.0 com banco de dados Oracle SQL versão 21c.
+- O sistema deverá ser desenvolvido no framework React versão 17.0.2 e NodeJS versão 16.13.0 com banco de dados MySQL Community versão 8.0.27.
 - O sistema deverá ter alta disponibilidade, de no mínimo, 90% do tempo de 24/7.
 
 <hr>
@@ -42,8 +42,8 @@ Requisitos não funcionais:
 ## Boas práticas de codificação
 
 - Utilize a extensão prettier do VSCode para formatar o código, mantendo as configurações padrão.
-- Evite componentes com códigos muito extensos, tente manter cada arquivo com uma única função primordial.
+- Utilize os cinco princípios [SOLID](https://pt.wikipedia.org/wiki/SOLID).
 - O CSS deve ficar em um arquivo separado, nomeado como <Nome_do_arquivo>.module.css e importado no componente.
 - Os arquivos, com exceção do App.js e index.js devem ser feitos utilizando a extensão '.jsx'.
 - Nomeie os arquivos, funções e variáveis de forma significativa, de forma com que faça sentido.
-- Evite comentários extensos, garanta que o código seja legível sem precisar de comentários para explicar cada passo.
+- Comentários devem ser limitados a até 150 caracteres.
