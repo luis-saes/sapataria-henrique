@@ -1,7 +1,4 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
+import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
@@ -9,104 +6,57 @@ import CancelIcon from "@mui/icons-material/Close";
 import {
   useGridApiRef,
   DataGridPro,
-  GridToolbarContainer,
   GridActionsCellItem,
 } from "@mui/x-data-grid-pro";
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomUpdatedDate,
-  randomId,
-} from "@mui/x-data-grid-generator";
-import { createTheme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
 
-const defaultTheme = createTheme();
+const MUITable = (props) => {
+  const rows = props.rows;
+  const columns = props.columns;
 
-const useStyles = makeStyles(
-  (theme) => ({
-    actions: {
-      color: theme.palette.text.secondary,
+  const editColumn = {
+    field: "actions",
+    type: "actions",
+    headerName: "Actions",
+    width: 100,
+    getActions: ({ id }) => {
+      const isInEditMode = apiRef.current.getRowMode(id) === "edit";
+
+      if (isInEditMode) {
+        return [
+          <GridActionsCellItem
+            icon={<SaveIcon />}
+            label="Save"
+            onClick={handleSaveClick(id)}
+            color="primary"
+          />,
+          <GridActionsCellItem
+            icon={<CancelIcon />}
+            label="Cancel"
+            onClick={handleCancelClick(id)}
+            color="inherit"
+          />,
+        ];
+      }
+
+      return [
+        <GridActionsCellItem
+          icon={<EditIcon />}
+          label="Edit"
+          onClick={handleEditClick(id)}
+          color="inherit"
+        />,
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          label="Delete"
+          onClick={handleDeleteClick(id)}
+          color="inherit"
+        />,
+      ];
     },
-    textPrimary: {
-      color: theme.palette.text.primary,
-    },
-  }),
-  { defaultTheme }
-);
-
-const rows = [
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 25,
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 36,
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 19,
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 28,
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-  {
-    id: randomId(),
-    name: randomTraderName(),
-    age: 23,
-    dateCreated: randomCreatedDate(),
-    lastLogin: randomUpdatedDate(),
-  },
-];
-
-function EditToolbar(props) {
-  const { apiRef } = props;
-
-  const handleClick = () => {
-    const id = randomId();
-    apiRef.current.updateRows([{ id, isNew: true }]);
-    apiRef.current.setRowMode(id, "edit");
-    // Wait for the grid to render with the new row
-    setTimeout(() => {
-      apiRef.current.scrollToIndexes({
-        rowIndex: apiRef.current.getRowsCount() - 1,
-      });
-
-      apiRef.current.setCellFocus(id, "name");
-    });
   };
 
-  return (
-    <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
-      </Button>
-    </GridToolbarContainer>
-  );
-}
+  columns.push(editColumn);
 
-EditToolbar.propTypes = {
-  apiRef: PropTypes.shape({
-    current: PropTypes.object.isRequired,
-  }).isRequired,
-};
-
-export default function FullFeaturedCrudGrid() {
-  const classes = useStyles();
   const apiRef = useGridApiRef();
 
   const handleRowEditStart = (params, event) => {
@@ -150,69 +100,6 @@ export default function FullFeaturedCrudGrid() {
     }
   };
 
-  const columns = [
-    { field: "name", headerName: "Name", width: 180, editable: true },
-    { field: "age", headerName: "Age", type: "number", editable: true },
-    {
-      field: "dateCreated",
-      headerName: "Date Created",
-      type: "date",
-      width: 180,
-      editable: true,
-    },
-    {
-      field: "lastLogin",
-      headerName: "Last Login",
-      type: "dateTime",
-      width: 220,
-      editable: true,
-    },
-    {
-      field: "actions",
-      type: "actions",
-      headerName: "Actions",
-      width: 100,
-      cellClassName: classes.actions,
-      getActions: ({ id }) => {
-        const isInEditMode = apiRef.current.getRowMode(id) === "edit";
-
-        if (isInEditMode) {
-          return [
-            <GridActionsCellItem
-              icon={<SaveIcon />}
-              label="Save"
-              onClick={handleSaveClick(id)}
-              color="primary"
-            />,
-            <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className={classes.textPrimary}
-              onClick={handleCancelClick(id)}
-              color="inherit"
-            />,
-          ];
-        }
-
-        return [
-          <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-            className={classes.textPrimary}
-            onClick={handleEditClick(id)}
-            color="inherit"
-          />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(id)}
-            color="inherit"
-          />,
-        ];
-      },
-    },
-  ];
-
   return (
     <div style={{ height: 500, width: "100%" }}>
       <DataGridPro
@@ -223,13 +110,12 @@ export default function FullFeaturedCrudGrid() {
         onRowEditStart={handleRowEditStart}
         onRowEditStop={handleRowEditStop}
         onCellFocusOut={handleCellFocusOut}
-        components={{
-          Toolbar: EditToolbar,
-        }}
         componentsProps={{
           toolbar: { apiRef },
         }}
       />
     </div>
   );
-}
+};
+
+export default MUITable;

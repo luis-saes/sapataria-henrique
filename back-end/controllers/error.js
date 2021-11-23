@@ -1,5 +1,5 @@
 exports.get404 = (req, res, next) => {
-  const error = new Error("not found");
+  const error = new Error("não encontrado");
   error.status = 404;
   next(error);
 };
