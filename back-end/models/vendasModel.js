@@ -33,7 +33,7 @@ module.exports = class Vendas {
     CPFCliente
   ) {
     return db.execute(
-      `INSERT INTO venda (ID, Situacao, Data, FormaPagamento, PrecoTotal, CPFFuncionario, CPFCliente) VALUES (${id}, '${situacao}', ${data}, '${formaPagamento}', ${precoTotal}, '${cpfFuncionario}', '${cpfCliente}')`
+      `INSERT INTO venda (ID, Situacao, Data, FormaPagamento, PrecoTotal, CPFFuncionario, CPFCliente) VALUES (${id}, '${situacao}', ${data}, '${formaPagamento}', ${precoTotal}, '${CPFFuncionario}', '${CPFCliente}')`
     );
   }
 
