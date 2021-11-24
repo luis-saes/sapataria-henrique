@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../Sidebar";
 import styles from "../Dashboard.module.css";
-// import MUITable from "../generic/MUITable";
+import MUITable from "../generic/MUITable";
 import { randomId } from "@mui/x-data-grid-generator";
 import axios from "axios";
 
@@ -13,14 +13,14 @@ import axios from "axios";
 
 const Funcionarios = () => {
   // componentDidMount();
-  return null;
+  // return null;
   const [post, setPost] = React.useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     axios.get("/funcionarios").then((response) => {
       setPost(response.data);
     });
-  });
+  }, []);
 
   if (!post) return null;
 
@@ -37,58 +37,65 @@ const Funcionarios = () => {
 
   console.log(mRows);
 
-  // const mColumns = [
-  //   {
-  //     field: "ID",
-  //     headerName: "ID",
-  //     width: 90,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "CPFCliente",
-  //     headerName: "CPF Cliente",
-  //     width: 180,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "CPFFuncionario",
-  //     headerName: "CPF Funcionario",
-  //     width: 180,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "Data",
-  //     headerName: "Data",
-  //     type: "date",
-  //     width: 180,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "FormaPagamento",
-  //     headerName: "Forma de Pagamento",
-  //     type: "string",
-  //     width: 180,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "PrecoTotal",
-  //     headerName: "Preço Total",
-  //     type: "string",
-  //     width: 180,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "Situacao",
-  //     headerName: "Situação",
-  //     type: "string",
-  //     editable: true,
-  //   },
-  // ];
+  const mColumns = [
+    {
+      field: "Bairro",
+      headerName: "Bairro",
+      width: 90,
+      editable: true,
+    },
+    {
+      field: "CPF",
+      headerName: "CPF",
+      width: 180,
+      editable: true,
+    },
+    {
+      field: "Cidade",
+      headerName: "Cidade",
+      width: 180,
+      editable: true,
+    },
+    {
+      field: "Complemento",
+      headerName: "Complemento",
+      width: 180,
+      editable: true,
+    },
+    {
+      field: "Estado",
+      headerName: "Estado",
+      width: 180,
+      editable: true,
+    },
+    {
+      field: "Logradouro",
+      headerName: "Logradouro",
+      width: 180,
+      editable: true,
+    },
+    {
+      field: "Nome",
+      headerName: "Nome",
+      editable: true,
+    },
+    {
+      field: "Numero",
+      headerName: "Número",
+      type: "number",
+      editable: true,
+    },
+    {
+      field: "Salario",
+      headerName: "Salário",
+      editable: true,
+    },
+  ];
 
   return (
     <div className={styles.dashboardOther}>
       <Sidebar />
-      {/* <MUITable rows={mRows} columns={mColumns} /> */}
+      <MUITable rows={mRows} columns={mColumns} />
     </div>
   );
 };

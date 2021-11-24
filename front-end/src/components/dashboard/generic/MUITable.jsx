@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
@@ -8,10 +8,31 @@ import {
   DataGridPro,
   GridActionsCellItem,
 } from "@mui/x-data-grid-pro";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const MUITable = (props) => {
   const rows = props.rows;
   const columns = props.columns;
+
+  const [modalUp, setModalUp] = useState(false);
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const editColumn = {
     field: "actions",
@@ -87,6 +108,8 @@ const MUITable = (props) => {
 
   const handleDeleteClick = (id) => (event) => {
     event.stopPropagation();
+    setModalUp(true);
+    handleOpen();
     apiRef.current.updateRows([{ id, _action: "delete" }]);
   };
 
@@ -102,6 +125,23 @@ const MUITable = (props) => {
 
   return (
     <div style={{ height: 500, width: "100%" }}>
+      {modalUp && (
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Text in a modal
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+          </Box>
+        </Modal>
+      )}
       <DataGridPro
         rows={rows}
         columns={columns}
