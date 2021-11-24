@@ -3,7 +3,6 @@ import Sidebar from "../Sidebar";
 import styles from "../Dashboard.module.css";
 import MUITable from "../generic/MUITable";
 import { randomId } from "@mui/x-data-grid-generator";
-import axios from "axios";
 
 // const componentDidMount = () => {
 //   axios.get("/funcionarios").then(function (response) {
@@ -15,11 +14,12 @@ const Funcionarios = () => {
   // componentDidMount();
   // return null;
   const [post, setPost] = React.useState(null);
-
   useEffect(() => {
-    axios.get("/funcionarios").then((response) => {
-      setPost(response.data);
-    });
+    fetch("http://localhost:3001/funcionarios")
+      .then((response) => response.json())
+      .then((json) => {
+        setPost(json);
+      });
   }, []);
 
   if (!post) return null;

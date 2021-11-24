@@ -11,6 +11,8 @@ import {
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
+import styles from "./MUITable.module.css";
 
 const style = {
   position: "absolute",
@@ -30,7 +32,9 @@ const MUITable = (props) => {
 
   const [modalUp, setModalUp] = useState(false);
 
-  const [open, setOpen] = React.useState(false);
+  const [currentId, setCurrentId] = useState(-1);
+
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -110,7 +114,15 @@ const MUITable = (props) => {
     event.stopPropagation();
     setModalUp(true);
     handleOpen();
+
+    setCurrentId(id);
+    console.log(id);
+  };
+
+  const handleConfirmDeleteClick = (id) => (event) => {
+    event.stopPropagation();
     apiRef.current.updateRows([{ id, _action: "delete" }]);
+    handleClose();
   };
 
   const handleCancelClick = (id) => (event) => {
@@ -134,11 +146,22 @@ const MUITable = (props) => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
+              Deseja confirmar a exclusão?
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleConfirmDeleteClick(currentId)}
+            >
+              Confirmar
+            </Button>
+            <Button
+              variant="outlined"
+              className={styles.cancelButton}
+              onClick={handleClose}
+            >
+              Cancelar
+            </Button>
           </Box>
         </Modal>
       )}
