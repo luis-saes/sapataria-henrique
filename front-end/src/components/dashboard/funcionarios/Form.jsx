@@ -1,24 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Sidebar from "../Sidebar";
+import { useForm, Form } from "../generic/useForm";
+import Input from "../generic/Input";
 import styles from "../Dashboard.module.css";
 import { validate } from "gerador-validador-cpf";
 
+const initialFValues = {
+  cpf: "",
+  nome: "",
+  salario: 0.0,
+  complemento: "",
+  logradouro: "",
+  cidade: "",
+  estado: "",
+  numero: 0,
+  bairro: "",
+};
+
 const Funcionarios = () => {
-  let values = {
-    cpf: "02608823726",
-    nome: "Keane Andrew",
-    salario: 4482.66,
-    complemento: "costume",
-    logradouro: "precede",
-    cidade: "slacnard",
-    estado: "SP",
-    numero: 2,
-    bairro: "adliarvertiang",
-  };
+  //   let values = {
+  //     cpf: "02608823726",
+  //     nome: "Keane Andrew",
+  //     salario: 4482.66,
+  //     complemento: "costume",
+  //     logradouro: "precede",
+  //     cidade: "slacnard",
+  //     estado: "SP",
+  //     numero: 2,
+  //     bairro: "adliarvertiang",
+  //   };
 
   const [cpf, setCpf] = useState("");
   const [nome, setNome] = useState("");
@@ -30,8 +44,8 @@ const Funcionarios = () => {
   const [numero, setNumero] = useState("");
   const [bairro, setBairro] = useState("");
 
-  const validateFields = () => {
-    let temp = {};
+  const validateFields = (fieldValues = values) => {
+    let temp = { ...errors };
     temp.cpf = validate(values.cpf) ? "" : "Campo obrigatório";
     temp.nome = values.nome.length < 256 ? "" : "Campo obrigatório";
     temp.salario = !isNaN(values.salario) ? "" : "Campo obrigatório";
@@ -46,10 +60,15 @@ const Funcionarios = () => {
     temp.numero = !isNaN(values.numero) ? "" : "Campo obrigatório";
     temp.bairro =
       values.bairro && values.bairro.legngth < 256 ? "" : "Campo obrigatório";
+    setErrors({
+      ...temp,
+    });
 
     return Object.values(temp).every((x) => x === "");
   };
-  validateFields();
+
+  const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
+    useForm(initialFValues, true, validate);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -60,96 +79,84 @@ const Funcionarios = () => {
   return (
     <div className={styles.dashboardOther}>
       <Sidebar />
-      <Box
-        sx={{
-          "& > :not(style)": { m: 1 },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <form onSubmit={submitHandler}>
-          <TextField
-            id="standard-basic"
+      <Form onSubmit={submitHandler}>
+        <Box
+          sx={{
+            "& > :not(style)": { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <Input
+            name="cpf"
             label="CPF"
-            variant="standard"
-            value={cpf}
-            onInput={(e) => setCpf(e.target.value)}
-            required
+            value={values.cpf}
+            onChange={handleInputChange}
+            error={errors.cpf}
           />
-          <TextField
-            id="standard-basic"
+          <Input
+            name="nome"
             label="Nome"
-            variant="standard"
-            value={nome}
-            onInput={(e) => setNome(e.target.value)}
-            required
+            value={values.nome}
+            onChange={handleInputChange}
+            error={errors.nome}
           />
-          <TextField
-            inputProps={{ inputMode: "numeric", pattern: "[0-9]*.[0-9][0-9]" }}
-            id="standard-basic"
+          <Input
+            name="salario"
             label="Salario"
-            variant="standard"
-            helperText="Salários devem estar com duas casas decimais no final, ex: 1000.00"
-            value={salario}
-            onInput={(e) => setSalario(e.target.value)}
-            required
+            value={values.salario}
+            onChange={handleInputChange}
+            error={errors.salario}
           />
-          <TextField
-            id="standard-basic"
+          <Input
+            name="complemento"
             label="Complemento"
-            variant="standard"
-            value={complemento}
-            onInput={(e) => setComplemento(e.target.value)}
-            required
+            value={values.complemento}
+            onChange={handleInputChange}
+            error={errors.complemento}
           />
-          <TextField
-            id="standard-basic"
+          <Input
+            name="logradouro"
             label="Logradouro"
-            variant="standard"
-            value={logradouro}
-            onInput={(e) => setLogradouro(e.target.value)}
-            required
+            value={values.logradouro}
+            onChange={handleInputChange}
+            error={errors.logradouro}
           />
-          <TextField
-            id="standard-basic"
+          <Input
+            name="cidade"
             label="Cidade"
-            variant="standard"
-            value={cidade}
-            onInput={(e) => setCidade(e.target.value)}
-            required
+            value={values.cidade}
+            onChange={handleInputChange}
+            error={errors.cidade}
           />
-          <TextField
-            id="standard-basic"
+          <Input
+            name="estado"
             label="Estado"
-            variant="standard"
-            value={estado}
-            onInput={(e) => setEstado(e.target.value)}
-            required
+            value={values.estado}
+            onChange={handleInputChange}
+            error={errors.estado}
           />
-          <TextField
-            inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-            id="standard-basic"
-            label="Numero"
-            variant="standard"
-            value={numero}
-            onInput={(e) => setNumero(e.target.value)}
-            required
+          <Input
+            name="numero"
+            label="Número"
+            value={values.numero}
+            onChange={handleInputChange}
+            error={errors.numero}
           />
-          <TextField
-            id="standard-basic"
+          <Input
+            name="bairro"
             label="Bairro"
-            variant="standard"
-            value={bairro}
-            onInput={(e) => setBairro(e.target.value)}
-            required
+            value={values.bairro}
+            onChange={handleInputChange}
+            error={errors.bairro}
           />
           {/* <Link to="/funcionarios" style={{ textDecoration: "none" }}> */}
           <Button type="submit" variant="outlined" onSubmit={submitHandler}>
             Adicionar Novo Funcionário
           </Button>
           {/* </Link> */}
-        </form>
-      </Box>
+        </Box>
+      </Form>
     </div>
   );
 };
