@@ -3,16 +3,8 @@ import Sidebar from "../Sidebar";
 import styles from "../Dashboard.module.css";
 import MUITable from "../generic/MUITable";
 import { randomId } from "@mui/x-data-grid-generator";
-import axios from "axios";
-
-const componentDidMount = () => {
-  axios.get("/clientes").then(function (response) {
-    console.log(response.data);
-  });
-};
 
 const Clientes = () => {
-  componentDidMount();
   const mRows = [
     {
       id: randomId(),

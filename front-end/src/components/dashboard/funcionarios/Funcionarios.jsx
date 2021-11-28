@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import styles from "../Dashboard.module.css";
 import MUITable from "../generic/MUITable";
@@ -95,7 +96,12 @@ const Funcionarios = () => {
   return (
     <div className={styles.dashboardOther}>
       <Sidebar />
-      <MUITable rows={mRows} columns={mColumns} />
+      <div style={{ width: "100%" }}>
+        <MUITable rows={mRows} columns={mColumns} />
+        <Link to="/funcionarios/adicionar" style={{ textDecoration: "none" }}>
+          <button>Koeeeeee</button>
+        </Link>
+      </div>
     </div>
   );
 };

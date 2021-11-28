@@ -1,23 +1,17 @@
 const db = require("../utils/database");
+const fieldValidation = require("../utils/validation");
 
 module.exports = class FuncionariosDAO {
   static fetchAll() {
     return db.execute("SELECT * FROM funcionario");
   }
 
-  static insertElement(
-    cpf,
-    nome,
-    salario,
-    complemento,
-    logradouro,
-    cidade,
-    estado,
-    numero,
-    bairro
-  ) {
+  static insertElement(jsonObj) {
+    if (!fieldValidation.funcionariosValidation(jsonObj)) {
+      return false;
+    }
     return db.execute(
-      `INSERT INTO funcionario (CPF, Nome, Salario, Complemento, Logradouro, Cidade, Estado, Numero, Bairro) VALUES ('${cpf}', '${nome}', ${salario}, '${complemento}', '${logradouro}', '${cidade}', '${estado}', ${numero}, '${bairro}')`
+      `INSERT INTO funcionario (CPF, Nome, Salario, Complemento, Logradouro, Cidade, Estado, Numero, Bairro) VALUES ('${jsonObj.cpf}', '${jsonObj.nome}', ${jsonObj.salario}, '${jsonObj.complemento}', '${jsonObj.logradouro}', '${jsonObj.cidade}', '${jsonObj.estado}', ${jsonObj.numero}, '${jsonObj.bairro}')`
     );
   }
 
