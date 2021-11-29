@@ -17,19 +17,10 @@ module.exports = class FuncionariosDAO {
     );
   }
 
-  static updateElement(
-    cpf,
-    nome,
-    salario,
-    complemento,
-    logradouro,
-    cidade,
-    estado,
-    numero,
-    bairro
-  ) {
+  static updateElement(jsonObj) {
+    console.log(jsonObj.CPF);
     return db.execute(
-      `UPDATE CPF, Nome, Salario, Complemento, Logradouro, Cidade, Estado, Numero, Bairro FROM funcionario WHERE CPF = '${cpf}'``INSERT INTO funcionario (CPF, Nome, Salario, Complemento, Logradouro, Cidade, Estado, Numero, Bairro) VALUES ('${cpf}', '${nome}', ${salario}, '${complemento}', '${logradouro}', '${cidade}', '${estado}', ${numero}, '${bairro}')`
+      `UPDATE funcionario SET CPF = '${jsonObj.CPF}', Nome = '${jsonObj.Nome}', Salario = ${jsonObj.Salario}, Complemento = '${jsonObj.Complemento}', Logradouro = '${jsonObj.Logradouro}', Cidade = '${jsonObj.Cidade}', Estado = '${jsonObj.Estado}', Numero = ${jsonObj.Numero}, Bairro = '${jsonObj.Bairro}' WHERE CPF = '${jsonObj.CPF}'`
     );
   }
 

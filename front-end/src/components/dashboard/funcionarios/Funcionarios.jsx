@@ -30,60 +30,67 @@ const Funcionarios = () => {
     });
   }
 
+  const columnNames = [
+    "Bairro",
+    "CPF",
+    "Cidade",
+    "Complemento",
+    "Estado",
+    "Logradouro",
+    "Nome",
+    "Numero",
+    "Salario",
+  ];
+
   const mColumns = [
     {
-      field: "Bairro",
       headerName: "Bairro",
       width: 90,
       editable: true,
     },
     {
-      field: "CPF",
       headerName: "CPF",
       width: 180,
       editable: true,
     },
     {
-      field: "Cidade",
       headerName: "Cidade",
       width: 180,
       editable: true,
     },
     {
-      field: "Complemento",
       headerName: "Complemento",
       width: 180,
       editable: true,
     },
     {
-      field: "Estado",
       headerName: "Estado",
       width: 180,
       editable: true,
     },
     {
-      field: "Logradouro",
       headerName: "Logradouro",
       width: 180,
       editable: true,
     },
     {
-      field: "Nome",
       headerName: "Nome",
       editable: true,
     },
     {
-      field: "Numero",
       headerName: "Número",
       type: "number",
       editable: true,
     },
     {
-      field: "Salario",
       headerName: "Salário",
       editable: true,
     },
   ];
+
+  mColumns.forEach((element, index) => {
+    element.field = columnNames[index];
+  });
 
   return (
     <div className={styles.dashboardOther}>
@@ -94,6 +101,7 @@ const Funcionarios = () => {
           columns={mColumns}
           link={funcionariosLink}
           keyToDelete="CPF"
+          columnNames={columnNames}
         />
         <Link to="/funcionarios/adicionar" style={{ textDecoration: "none" }}>
           <button>Koeeeeee</button>

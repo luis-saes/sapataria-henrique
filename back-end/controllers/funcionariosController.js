@@ -26,8 +26,9 @@ exports.funcionariosPost = async (req, res, next) => {
 };
 
 exports.funcionariosUpdate = async (req, res, next) => {
+  console.log(req.body);
   try {
-    await Funcionarios.updateElement();
+    await Funcionarios.updateElement(req.body);
     res.status(200);
   } catch (err) {
     if (!err.statusCode) {

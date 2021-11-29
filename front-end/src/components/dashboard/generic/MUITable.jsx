@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import styles from "./MUITable.module.css";
+import _ from "lodash";
 
 const style = {
   position: "absolute",
@@ -103,11 +104,33 @@ const MUITable = (props) => {
 
   const handleSaveClick = (id) => (event) => {
     event.stopPropagation();
+    const beforeValue = apiRef.current.getRow(id);
     apiRef.current.commitRowChange(id);
     apiRef.current.setRowMode(id, "view");
 
-    const row = apiRef.current.getRow(id);
-    apiRef.current.updateRows([{ ...row, isNew: false }]);
+    // const row = apiRef.current.getRow(id);
+    // apiRef.current.updateRows([{ ...row, isNew: false }]);
+
+    const valuesToUpdate = {};
+    props.columnNames.forEach((column) => {
+      valuesToUpdate[column] = apiRef.current.getRow(id)[column];
+    });
+
+    delete beforeValue.id;
+    if (!_.isEqual(beforeValue, valuesToUpdate)) {
+      (async () => {
+        const rawResponse = await fetch("http://localhost:3001/funcionarios", {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(valuesToUpdate),
+        });
+        const content = await rawResponse.json();
+        console.log(content);
+      })();
+    }
   };
 
   const handleDeleteClick = (id) => (event) => {
