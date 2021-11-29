@@ -5,15 +5,7 @@ import styles from "../Dashboard.module.css";
 import MUITable from "../generic/MUITable";
 import { randomId } from "@mui/x-data-grid-generator";
 
-// const componentDidMount = () => {
-//   axios.get("/funcionarios").then(function (response) {
-//     console.log(response.data);
-//   });
-// };
-
 const Funcionarios = () => {
-  // componentDidMount();
-  // return null;
   const [post, setPost] = React.useState(null);
   useEffect(() => {
     fetch("http://localhost:3001/funcionarios")
@@ -35,8 +27,6 @@ const Funcionarios = () => {
       mRows[i][key] = post[i][key];
     });
   }
-
-  console.log(mRows);
 
   const mColumns = [
     {

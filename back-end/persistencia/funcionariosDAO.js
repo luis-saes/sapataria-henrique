@@ -8,8 +8,10 @@ module.exports = class FuncionariosDAO {
 
   static insertElement(jsonObj) {
     if (!fieldValidation.funcionariosValidation(jsonObj)) {
+      console.log("Falou na inserção, poxa...");
       return false;
     }
+    console.log("Deu bom na inserção!!!!");
     return db.execute(
       `INSERT INTO funcionario (CPF, Nome, Salario, Complemento, Logradouro, Cidade, Estado, Numero, Bairro) VALUES ('${jsonObj.cpf}', '${jsonObj.nome}', ${jsonObj.salario}, '${jsonObj.complemento}', '${jsonObj.logradouro}', '${jsonObj.cidade}', '${jsonObj.estado}', ${jsonObj.numero}, '${jsonObj.bairro}')`
     );

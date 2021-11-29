@@ -1,6 +1,6 @@
 const Funcionarios = require("../persistencia/funcionariosDAO");
 
-exports.funcionariosController = async (req, res, next) => {
+exports.funcionariosGet = async (req, res, next) => {
   try {
     const [allFuncionarios] = await Funcionarios.fetchAll();
     res.status(200).json(allFuncionarios);
@@ -12,9 +12,10 @@ exports.funcionariosController = async (req, res, next) => {
   }
 };
 
-exports.post = async (req, res, next) => {
+exports.funcionariosPost = async (req, res, next) => {
   try {
-    await Funcionarios.insertElement();
+    console.log("req.body funcionando no arquivo FuncionariosController.js");
+    await Funcionarios.insertElement(req.body);
     res.status(200);
   } catch (err) {
     if (!err.statusCode) {
@@ -24,9 +25,9 @@ exports.post = async (req, res, next) => {
   }
 };
 
-exports.update = async (req, res, next) => {
+exports.funcionariosUpdate = async (req, res, next) => {
   try {
-    await Funcionarios.insertElement();
+    await Funcionarios.updateElement();
     res.status(200);
   } catch (err) {
     if (!err.statusCode) {
@@ -36,7 +37,7 @@ exports.update = async (req, res, next) => {
   }
 };
 
-exports.delete = async (req, res, next) => {
+exports.funcionariosDelete = async (req, res, next) => {
   try {
     await Funcionarios.removeElement();
     res.status(200);

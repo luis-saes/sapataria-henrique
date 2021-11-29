@@ -22,44 +22,63 @@ const initialFValues = {
 };
 
 const Funcionarios = () => {
-  //   let values = {
-  //     cpf: "02608823726",
-  //     nome: "Keane Andrew",
-  //     salario: 4482.66,
-  //     complemento: "costume",
-  //     logradouro: "precede",
-  //     cidade: "slacnard",
-  //     estado: "SP",
-  //     numero: 2,
-  //     bairro: "adliarvertiang",
-  //   };
-
-  const [cpf, setCpf] = useState("");
-  const [nome, setNome] = useState("");
-  const [salario, setSalario] = useState("");
-  const [complemento, setComplemento] = useState("");
-  const [logradouro, setLogradouro] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [estado, setEstado] = useState("");
-  const [numero, setNumero] = useState("");
-  const [bairro, setBairro] = useState("");
+  let temp;
 
   const validateFields = (fieldValues = values) => {
-    let temp = { ...errors };
-    temp.cpf = validate(values.cpf) ? "" : "Campo obrigatório";
-    temp.nome = values.nome.length < 256 ? "" : "Campo obrigatório";
-    temp.salario = !isNaN(values.salario) ? "" : "Campo obrigatório";
+    temp = { ...errors };
+
+    temp.cpf = validate(values.cpf) ? "" : "CPF inválido";
+    temp.nome =
+      values.nome.length < 256 ? "" : "Limite de caracteres (255) ultrapassado";
+    temp.salario =
+      values.salario && !isNaN(Number(values.salario))
+        ? ""
+        : "Salario deve ser do tipo número";
     temp.complemento =
-      values.complemento && values.complemento < 256 ? "" : "Campo obrigatório";
+      values.complemento.length < 256
+        ? ""
+        : "Limite de caracteres (255) ultrapassado";
     temp.logradouro =
-      values.logradouro && values.logradouro < 256 ? "" : "Campo obrigatório";
+      values.logradouro.length < 256
+        ? ""
+        : "Limite de caracteres (255) ultrapassado";
     temp.cidade =
-      values.cidade && values.cidade.length < 256 ? "" : "Campo obrigatório";
+      values.cidade.length < 256
+        ? ""
+        : "Limite de caracteres (255) ultrapassado";
     temp.estado =
-      values.estado && values.estado.length === 2 ? "" : "Campo obrigatório";
-    temp.numero = !isNaN(values.numero) ? "" : "Campo obrigatório";
+      values.estado.length === 2 ? "" : "Estado deve ter 2 caracteres";
+    temp.numero =
+      values.numero && !isNaN(Number(values.numero))
+        ? ""
+        : "Numero deve ser do tipo número";
     temp.bairro =
-      values.bairro && values.bairro.legngth < 256 ? "" : "Campo obrigatório";
+      values.bairro.length < 256
+        ? ""
+        : "Limite de caracteres (255) ultrapassado";
+
+    temp.cpf = values.cpf
+      ? temp.cpf
+      : "Campo obrigatório, não pode estar vazio";
+    temp.nome = values.nome
+      ? temp.nome
+      : "Campo obrigatório, não pode estar vazio";
+    temp.complemento = values.complemento
+      ? temp.complemento
+      : "Campo obrigatório, não pode estar vazio";
+    temp.logradouro = values.logradouro
+      ? temp.logradouro
+      : "Campo obrigatório, não pode estar vazio";
+    temp.cidade = values.cidade
+      ? temp.cidade
+      : "Campo obrigatório, não pode estar vazio";
+    temp.estado = values.estado
+      ? temp.estado
+      : "Campo obrigatório, não pode estar vazio";
+    temp.bairro = values.bairro
+      ? temp.bairro
+      : "Campo obrigatório, não pode estar vazio";
+
     setErrors({
       ...temp,
     });
@@ -69,11 +88,27 @@ const Funcionarios = () => {
 
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFValues, true, validate);
+  const [post, setPost] = React.useState(null);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(event.target);
-    console.log(validateFields());
+    if (validateFields()) {
+      (async () => {
+        const rawResponse = await fetch("http://localhost:3001/funcionarios", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+        const content = await rawResponse.json();
+        console.log(1234567890);
+        console.log(content);
+      })();
+    } else {
+      console.log("Deu ruim!");
+    }
   };
 
   return (
