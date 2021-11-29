@@ -39,7 +39,7 @@ exports.funcionariosUpdate = async (req, res, next) => {
 
 exports.funcionariosDelete = async (req, res, next) => {
   try {
-    await Funcionarios.removeElement();
+    await Funcionarios.removeElement(req.body);
     res.status(200);
   } catch (err) {
     if (!err.statusCode) {

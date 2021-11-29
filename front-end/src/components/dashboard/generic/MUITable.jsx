@@ -121,7 +121,24 @@ const MUITable = (props) => {
 
   const handleConfirmDeleteClick = (id) => (event) => {
     event.stopPropagation();
+    const valueToDelete = {};
+    valueToDelete.cpf = apiRef.current.getRow(id)[props.keyToDelete];
     apiRef.current.updateRows([{ id, _action: "delete" }]);
+
+    console.log(props.link, valueToDelete);
+    (async () => {
+      const rawResponse = await fetch(props.link, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(valueToDelete),
+      });
+      const content = await rawResponse.json();
+      console.log(content);
+    })();
+
     handleClose();
   };
 

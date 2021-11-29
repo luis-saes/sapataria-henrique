@@ -33,8 +33,9 @@ module.exports = class FuncionariosDAO {
     );
   }
 
-  static removeElement(cpf) {
-    db.execute(`DELETE FROM venda WHERE cpffuncionario = '${cpf}'`);
-    return db.execute(`DELETE FROM funcionario WHERE cpf = '${cpf}'`);
+  static removeElement(jsonObj) {
+    console.log("removeElement", jsonObj);
+    db.execute(`DELETE FROM venda WHERE cpffuncionario = '${jsonObj.cpf}'`);
+    return db.execute(`DELETE FROM funcionario WHERE cpf = '${jsonObj.cpf}'`);
   }
 };

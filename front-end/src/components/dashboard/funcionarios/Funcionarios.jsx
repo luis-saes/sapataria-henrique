@@ -6,9 +6,11 @@ import MUITable from "../generic/MUITable";
 import { randomId } from "@mui/x-data-grid-generator";
 
 const Funcionarios = () => {
+  const funcionariosLink = "http://localhost:3001/funcionarios";
+
   const [post, setPost] = React.useState(null);
   useEffect(() => {
-    fetch("http://localhost:3001/funcionarios")
+    fetch(funcionariosLink)
       .then((response) => response.json())
       .then((json) => {
         setPost(json);
@@ -87,7 +89,12 @@ const Funcionarios = () => {
     <div className={styles.dashboardOther}>
       <Sidebar />
       <div style={{ width: "100%" }}>
-        <MUITable rows={mRows} columns={mColumns} />
+        <MUITable
+          rows={mRows}
+          columns={mColumns}
+          link={funcionariosLink}
+          keyToDelete="CPF"
+        />
         <Link to="/funcionarios/adicionar" style={{ textDecoration: "none" }}>
           <button>Koeeeeee</button>
         </Link>
