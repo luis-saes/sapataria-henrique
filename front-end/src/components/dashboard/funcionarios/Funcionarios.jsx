@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import styles from "../Dashboard.module.css";
+import Button from "@mui/material/Button";
 import MUITable from "../generic/MUITable";
 import { randomId } from "@mui/x-data-grid-generator";
 
@@ -104,7 +105,9 @@ const Funcionarios = () => {
           columnNames={columnNames}
         />
         <Link to="/funcionarios/adicionar" style={{ textDecoration: "none" }}>
-          <button>Koeeeeee</button>
+          <Button type="submit" variant="outlined">
+            Adicionar Novo Funcionário
+          </Button>
         </Link>
       </div>
     </div>
