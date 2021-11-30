@@ -1,43 +1,17 @@
-const db = require("../utils/database");
+//função auxiliar, de exemplo
+exports.calculateAge = (date) => {
+  let today = new Date();
+  let birthDate = new Date(date);
 
-module.exports = class Vendas {
-  constructor(
-    id,
-    situacao,
-    data,
-    formaPagamento,
-    precoTotal,
-    CPFFuncionario,
-    CPFCliente
-  ) {
-    this.id = id;
-    this.situacao = situacao;
-    this.data = data;
-    this.formaPagamento = formaPagamento;
-    this.precoTotal = precoTotal;
-    this.CPFFuncionario = CPFFuncionario;
-    this.CPFCliente = CPFCliente;
-  }
+  let age = today.getFullYear() - birthDate.getFullYear();
+  let month = today.getMonth() - birthDate.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate()))
+    --age;
 
-  static fetchAll() {
-    return db.execute("SELECT * FROM venda");
-  }
+  return age;
+};
 
-  static insertElement(
-    id,
-    situacao,
-    data,
-    formaPagamento,
-    precoTotal,
-    CPFFuncionario,
-    CPFCliente
-  ) {
-    return db.execute(
-      `INSERT INTO venda (ID, Situacao, Data, FormaPagamento, PrecoTotal, CPFFuncionario, CPFCliente) VALUES (${id}, '${situacao}', ${data}, '${formaPagamento}', ${precoTotal}, '${CPFFuncionario}', '${CPFCliente}')`
-    );
-  }
-
-  static removeElement(id) {
-    return db.execute(`DELETE FROM venda WHERE id = ${id}`);
-  }
+//salario, preco
+exports.changeToPrecision2 = (aNumber) => {
+  return (Math.round(Number(aNumber) * 100) / 100).toFixed(2);
 };
