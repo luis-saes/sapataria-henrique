@@ -33,14 +33,15 @@ Requisitos não funcionais:
 
 ## Regras de uso do Git
 
-- Para mudanças de código, utilize a branch dev.
-- Se desejar passar as mudanças da branch dev para a main, criar um pull request.
 - Utilize o .gitignore para excluir arquivos muito pesados.
 - Utilize o .gitignore para excluir arquivos desnecessários para a atualização do projeto no git.
 - Para os ícones, utilizar imagens vetoriais (extensão .svg).
 - Não alterar a estrutura de pastas.
 - Mantenha os arquivos de mídia dentro da pasta src/assets.
 - Se for adicionar 5 ou mais arquivos de mídia dentro de uma mesma página, criar uma nova pasta dentro de str/assets.
+- Mantenha os arquivos do back-end para operações CRUD nas pastas controllers, models, persistencia e routes.
+- Ao terminar a tarefa de uma issue, marcar a checkbox.
+- Ao terminar todas as tarefas de uma issue, colocá-la na coluna "To Test".
 
 ## Boas práticas de codificação
 
