@@ -1,5 +1,6 @@
 const db = require("../utils/database");
 const fieldValidation = require("../utils/validation");
+const funcionariosModel = require("../models/funcionariosModel");
 
 module.exports = class FuncionariosDAO {
   static fetchAll() {
@@ -7,6 +8,9 @@ module.exports = class FuncionariosDAO {
   }
 
   static insertElement(jsonObj) {
+    jsonObj.salario = funcionariosModel.changeToPrecision2(
+      Number(jsonObj.salario)
+    );
     if (!fieldValidation.funcionariosValidation(jsonObj)) {
       console.log("Falou na inserção, poxa...");
       return false;

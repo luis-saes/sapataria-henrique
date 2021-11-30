@@ -1,24 +1,12 @@
-const db = require("../utils/database");
+//função auxiliar, de exemplo
+exports.calculateAge = (date) => {
+  let today = new Date();
+  let birthDate = new Date(date);
 
-module.exports = class Clientes {
-  constructor(cpf, nome, telefone) {
-    this.cpf = cpf;
-    this.nome = nome;
-    this.telefone = telefone;
-  }
+  let age = today.getFullYear() - birthDate.getFullYear();
+  let month = today.getMonth() - birthDate.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate()))
+    --age;
 
-  static fetchAll() {
-    return db.execute("SELECT * FROM cliente");
-  }
-
-  static insertElement(cpf, nome, telefone) {
-    return db.execute(
-      `INSERT INTO cliente (CPF, Nome, Telefone) VALUES ('${cpf}', '${nome}', '${telefone}')`
-    );
-  }
-
-  static removeElement(cpf) {
-    db.execute(`DELETE FROM venda WHERE cpfcliente = '${cpf}'`);
-    return db.execute(`DELETE FROM cliente WHERE cpf = '${cpf}'`);
-  }
+  return age;
 };
