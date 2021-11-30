@@ -22,7 +22,9 @@ module.exports = class FuncionariosDAO {
   }
 
   static updateElement(jsonObj) {
-    console.log(jsonObj.CPF);
+    jsonObj.Salario = funcionariosModel.changeToPrecision2(
+      Number(jsonObj.Salario, typeof jsonObj.Salario)
+    );
     return db.execute(
       `UPDATE funcionario SET CPF = '${jsonObj.CPF}', Nome = '${jsonObj.Nome}', Salario = ${jsonObj.Salario}, Complemento = '${jsonObj.Complemento}', Logradouro = '${jsonObj.Logradouro}', Cidade = '${jsonObj.Cidade}', Estado = '${jsonObj.Estado}', Numero = ${jsonObj.Numero}, Bairro = '${jsonObj.Bairro}' WHERE CPF = '${jsonObj.CPF}'`
     );

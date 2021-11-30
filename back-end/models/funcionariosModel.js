@@ -13,5 +13,5 @@ exports.calculateAge = (date) => {
 
 //salario, preco
 exports.changeToPrecision2 = (aNumber) => {
-  return Number(aNumber.toPrecision(2));
+  return (Math.round(Number(aNumber) * 100) / 100).toFixed(2);
 };

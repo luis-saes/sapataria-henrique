@@ -1,43 +1,16 @@
-const db = require("../utils/database");
+//função auxiliar, de exemplo
+exports.calculateAge = (date) => {
+  let today = new Date();
+  let birthDate = new Date(date);
 
-module.exports = class Vendas {
-  constructor(
-    referencia,
-    precoVenda,
-    nome,
-    descricao,
-    marca,
-    tamanho,
-    quantidadeEstoque
-  ) {
-    this.referencia = referencia;
-    this.PrecoVenda = precoVenda;
-    this.nome = nome;
-    this.descricao = descricao;
-    this.marca = marca;
-    this.tamanho = tamanho;
-    this.quantidadeEstoque = quantidadeEstoque;
-  }
+  let age = today.getFullYear() - birthDate.getFullYear();
+  let month = today.getMonth() - birthDate.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate()))
+    --age;
 
-  static fetchAll() {
-    return db.execute("SELECT * FROM produto");
-  }
+  return age;
+};
 
-  static insertElement(
-    referencia,
-    precoVenda,
-    nome,
-    descricao,
-    marca,
-    tamanho,
-    quantidadeEstoque
-  ) {
-    return db.execute(
-      `INSERT INTO produto (Referencia, PrecoVenda, Nome, Descricao, Marca, Tamanho, QuantidadeEstoque) VALUES (${referencia}, ${precoVenda}, '${nome}', '${descricao}', '${marca}', ${tamanho}, '${quantidadeEstoque}')`
-    );
-  }
-
-  static removeElement(referencia) {
-    return db.execute(`DELETE FROM venda WHERE referencia = '${referencia}'`);
-  }
+exports.changeToPrecision2 = (aNumber) => {
+  return (Math.round(Number(aNumber) * 100) / 100).toFixed(2);
 };

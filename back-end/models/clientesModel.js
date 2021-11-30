@@ -10,3 +10,7 @@ exports.calculateAge = (date) => {
 
   return age;
 };
+
+exports.changeToPrecision2 = (aNumber) => {
+  return (Math.round(Number(aNumber) * 100) / 100).toFixed(2);
+};

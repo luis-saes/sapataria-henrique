@@ -1,6 +1,6 @@
-const Sapatos = require("../models/sapatosModel");
+const Sapatos = require("../persistencia/sapatosDAO");
 
-exports.get = async (req, res, next) => {
+exports.sapatosGet = async (req, res, next) => {
   try {
     const [allSapatos] = await Sapatos.fetchAll();
     res.status(200).json(allSapatos);
@@ -12,9 +12,10 @@ exports.get = async (req, res, next) => {
   }
 };
 
-exports.post = async (req, res, next) => {
+exports.sapatosPost = async (req, res, next) => {
   try {
-    await Sapatos.insertElement();
+    console.log("req.body funcionando no arquivo SapatosController.js");
+    await Sapatos.insertElement(req.body);
     res.status(200);
   } catch (err) {
     if (!err.statusCode) {
@@ -24,9 +25,22 @@ exports.post = async (req, res, next) => {
   }
 };
 
-exports.delete = async (req, res, next) => {
+exports.sapatosUpdate = async (req, res, next) => {
+  console.log(req.body);
   try {
-    await Sapatos.removeElement();
+    await Sapatos.updateElement(req.body);
+    res.status(200);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+exports.sapatosDelete = async (req, res, next) => {
+  try {
+    await Sapatos.removeElement(req.body);
     res.status(200);
   } catch (err) {
     if (!err.statusCode) {
