@@ -21,7 +21,7 @@ const Funcionarios = () => {
   if (!post) return null;
 
   const mRows = [];
-  for (let i = 0; i < 50; ++i) {
+  for (let i = 0; i < post.length; ++i) {
     mRows.push({
       id: randomId(),
     });
@@ -52,7 +52,7 @@ const Funcionarios = () => {
     {
       headerName: "CPF",
       width: 180,
-      editable: true,
+      editable: false,
     },
     {
       headerName: "Cidade",

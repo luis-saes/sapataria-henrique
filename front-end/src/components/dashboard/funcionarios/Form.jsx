@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -107,6 +107,11 @@ const Funcionarios = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (validateFields()) {
+      const tempData = new Date(values.Data);
+      values.Data = `${tempData.getFullYear()}-${
+        tempData.getMonth() + 1
+      }-${tempData.getDate()}`;
+
       (async () => {
         const rawResponse = await fetch("http://localhost:3001/funcionarios", {
           method: "POST",

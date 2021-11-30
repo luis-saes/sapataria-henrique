@@ -10,6 +10,7 @@ export default function Input(props) {
       name={name}
       value={value}
       onChange={onChange}
+      type={props.typeProps}
       {...(error && { error: true, helperText: error })}
     />
   );

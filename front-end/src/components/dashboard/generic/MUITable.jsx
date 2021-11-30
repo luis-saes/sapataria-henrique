@@ -108,18 +108,22 @@ const MUITable = (props) => {
     apiRef.current.commitRowChange(id);
     apiRef.current.setRowMode(id, "view");
 
-    // const row = apiRef.current.getRow(id);
-    // apiRef.current.updateRows([{ ...row, isNew: false }]);
-
     const valuesToUpdate = {};
     props.columnNames.forEach((column) => {
       valuesToUpdate[column] = apiRef.current.getRow(id)[column];
     });
 
+    if (valuesToUpdate.hasOwnProperty("Data")) {
+      const tempData = new Date(valuesToUpdate.Data);
+      valuesToUpdate.Data = `${tempData.getFullYear()}-${
+        tempData.getMonth() + 1
+      }-${tempData.getDate()}`;
+    }
+
     delete beforeValue.id;
     if (!_.isEqual(beforeValue, valuesToUpdate)) {
       (async () => {
-        const rawResponse = await fetch("http://localhost:3001/funcionarios", {
+        const rawResponse = await fetch(props.link, {
           method: "PUT",
           headers: {
             Accept: "application/json",
@@ -145,7 +149,8 @@ const MUITable = (props) => {
   const handleConfirmDeleteClick = (id) => (event) => {
     event.stopPropagation();
     const valueToDelete = {};
-    valueToDelete.cpf = apiRef.current.getRow(id)[props.keyToDelete];
+    valueToDelete[props.keyToDelete] =
+      apiRef.current.getRow(id)[props.keyToDelete];
     apiRef.current.updateRows([{ id, _action: "delete" }]);
 
     console.log(props.link, valueToDelete);
