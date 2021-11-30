@@ -32,7 +32,7 @@ module.exports = class FuncionariosDAO {
 
   static removeElement(jsonObj) {
     console.log("removeElement", jsonObj);
-    db.execute(`DELETE FROM venda WHERE cpffuncionario = '${jsonObj.cpf}'`);
-    return db.execute(`DELETE FROM funcionario WHERE cpf = '${jsonObj.cpf}'`);
+    db.execute(`DELETE FROM venda WHERE cpffuncionario = '${jsonObj.CPF}'`);
+    return db.execute(`DELETE FROM funcionario WHERE cpf = '${jsonObj.CPF}'`);
   }
 };
