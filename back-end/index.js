@@ -4,6 +4,7 @@ const funcionariosRoutes = require("./routes/funcionariosRoute");
 const clientesRoutes = require("./routes/clientesRoute");
 const sapatosRoutes = require("./routes/sapatosRoute");
 const vendasRoutes = require("./routes/vendasRoute");
+const loginRoutes = require("./routes/loginRoute");
 const errorController = require("./controllers/error");
 
 const app = express();
@@ -26,6 +27,7 @@ app.use("/funcionarios", funcionariosRoutes);
 app.use("/clientes", clientesRoutes);
 app.use("/sapatos", sapatosRoutes);
 app.use("/vendas", vendasRoutes);
+app.use("/login", loginRoutes);
 app.use(errorController.get404);
 app.use(errorController.get500);
 

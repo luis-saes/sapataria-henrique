@@ -13,9 +13,7 @@ exports.vendasGet = async (req, res, next) => {
 };
 
 exports.vendasPost = async (req, res, next) => {
-  console.log(req.body);
   try {
-    console.log("req.body funcionando no arquivo VendasController.js");
     await Vendas.insertElement(req.body);
     res.status(200);
   } catch (err) {
